@@ -1,20 +1,25 @@
-import selenium
 from selenium import webdriver
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-
 username = ''
 password = ''
 
 url = 'http://hrms.turabit.com/symfony/web/index.php/auth/login'
-# driver = webdriver.Chrome(executable_path ="C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe")
-# driver.get(url)
-#
-# from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-# import time
+page = "http://hrms.turabit.com/symfony/web/index.php/attendance/punchOut"
+browser = webdriver.Chrome(executable_path =r"C:\driver\chromedriver.exe")
+browser.get(url)
 
-# driver = webdriver.Chrome(ChromeDriverManager().install())
 
-driver = webdriver.Chrome(executable_path ="C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe")
-driver.get(url)
+username_entry = browser.find_element_by_id("txtUsername")
+username_entry.send_keys(username)
 
+password_entry = browser.find_element_by_id("txtPassword")
+password_entry.send_keys(password)
+
+login = browser.find_element_by_id("btnLogin")
+login.click()
+
+browser.get(page)
+
+punch = browser.find_element_by_id("btnPunch")
+punch.click()
+
+browser.close()
